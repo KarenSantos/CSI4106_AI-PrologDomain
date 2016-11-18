@@ -1,124 +1,201 @@
 % Comics Characters
 
-% This is a knowledge base of Characters of the comics. A character has a creator, a super power and a weakness. A character can be good or evil, human or not, can use a weapon or not, and can use a cape or not.
-
+% This is a knowledge base of Characters of the comic books.
 
 % Questions that can be asked ————————————————————————————————————————————————————
 
-% What is a human?
+% Who is a human? Is this character a human?
 
-human(Person):-
-	born(Person, terra).
+human(Character):-
+	born(Character, earth).
 
+% Who is a metahuman? Is this character a metahuman?
 
-% Is X a character from Marvel comics? What is a character X from Marvel comics?
+metahuman(Character):-
+	human(Character).
+%	bornWithPower(Character).
 
-marvel(X):-
-	creator(marvel, X).
+% Who are the characters in the comics?
 
+character(Character):-
+	superhero(Character);
+	antihero(Character);
+	villain(Character);
+	person(Character).
+	
+% Who are all the distinct characters?
 
-% What is a character X from DC comics?
+allCharacters(List):-
+	setof(Char, character(Char), List).
 
-dc(X):-
-	creator(dc, X).
+% Is a character from Marvel comics? Who is a character from Marvel comics?
 
+marvel(Character):-
+	creator(marvel, Character).
 
-% Is this Person a Superhero? What is a Superhero X?
+% Is a character from DC comics? Who is a character from DC comics?
 
-superhero(Person):-
-	arrests(Person, badGuys);
-	arrests(Person, villain(_)).
+dc(Character):-
+	creator(dc, Character).
 
-% Is X a superhero from Marvel comics? What is a superhero X from Marvel comics?
+% Is this character a Superhero? Who is a Superhero?
 
-superhero(X, marvel):-
-	superHero(X),
-	marvel(X).
+superhero(Character):-
+	arrests(Character, villain(_)),
+	hurts(Character, villain(_)).
 
-% Is X a superhero from DC comics? What is a superhero X from DC comics?
+% Is this character a superhero from Marvel comics? Who is a Superhero from Marvel comics?
 
-superhero(X, dc):-
-	superHero(X),
-	dc(X).
+superhero(Character, marvel):-
+	superhero(Character),
+	marvel(Character).
 
+% Is this character a superhero from DC comics? Who is a superhero from DC comics?
 
-% Is X a villain? What is a villain X?
+superhero(Character, dc):-
+	superhero(Character),
+	dc(Character).
+	
+% Is this character an Antihero? Who is an Antihero?
 
-villain(X):-
-	kills(X, _);
-	hurt(X, goodGuys);
-	hurt(X, badGuys);
-	hurt(X, superhero(Y)).
+antihero(Character):-
+	arrests(Character, villain(_)),
+	hurts(Character, villain(_)),
+	kills(Character, villain(_)),
+	\evilplan(Character, _).
+	
+% Is this character an antihero from Marvel comics? Who is an antihero from Marvel comics?
 
-% Is X a villain from Marvel comics? What is a villain X from Marvel comics?
+antihero(Character, marvel):-
+	antihero(Character),
+	marvel(Character).
 
-villain(X, marvel):-
-	villain(X),
-	marvel(X).
+% Is this character an antihero from DC comics? Who is an antihero from DC comics?
 
-% Is X a villain from DC comics? What is a villain X from DC comics?
+antihero(Character, dc):-
+	antihero(Character),
+	dc(Character).
 
-villain(X, dc):-
-	villain(X),
-	dc(X).
+% Is this character a villain? Who is a villain?
 
+villain(Character):-
+	kills(Character, _),
+	hurts(Character, _),
+	evilPlan(Character, _).
 
-% What superhero X is archenemy of villain Y?
+% Is this character a villain from Marvel comics? Who is a villain from Marvel comics?
 
-archenemy(X, Y):-
-	superhero(X),
-	villain(Y),
-	hurt(Y, Z),
-	friends(X, Z).
+villain(Character, marvel):-
+	villain(Character),
+	marvel(Character).
 
+% Is character a villain from DC comics? Who is a villain from DC comics?
 
-% Other questions that can be made using the facts —————————————————————————————————
+villain(Character, dc):-
+	villain(Character),
+	dc(Character).
 
-% What character X has power Y?
-% What is the real name of character X?
-% What character X is human?
-% What character X is not human?
+% What superhero is archenemy of what villain?
 
+archenemy(Superhero, Villain):-
+	superhero(Superhero),
+	villain(Villain),
+	hurts(Villain, Person),
+	friends(Superhero, Person).
 
+% Is a character part of an experiment?
 
+experiment(Character):-
+	human(Character),
+	\metahuman(Character),
+	power(_).
+
+% What characters are competitors?
+
+competitor(Char1, Char2):-
+	superhero(Char1, marvel),
+	superhero(Char2, dc),
+	power(Char1, X),         % ToDo: change this to at least 3 powers that are the same.
+	power(Char2, X).
+	
+competitor(Char1, Char2):-
+	villain(Char1),
+	villain(Char2),
+	evilPlan(Char1, X),
+	evilPlan(Char2, X).
+	
+% What 
 
 % FACTS ————————————————————————————————————————————
 
-creator(marvel, spiderMan).
+creator(marvel, spiderman).
 creator(marvel, doctorOctopus).
-
 creator(dc, superman).
-	
+creator(marvel, deadpool).
 
-arrests(spiderMan, badGuys).
-arrests(spiderMan, doctorOctopus).
+arrests(spiderman, villain(_)).
+arrests(superman, villain(_)).
+arrests(deadpool, villain(_)).
 
-arrests(superman, badGuys).
+hurts(spiderman, villain(_)).
+hurts(doctorOctopus, maryJane).
+hurts(doctorOctopus, superhero(_)).
+hurts(superman, villain(_)).
+hurts(deadpool, villain(_)).
+
+kills(doctorOctopus, anyone).
+kills(deadpool, villain(_)).
+
+power(spiderman, strength).
+power(spiderman, reflexes).
+power(spiderman, equilibrium).
+power(spiderman, spiderClaw).
+power(doctorOctopus, intelligence).
+power(superman, strength).
+power(superman, speed).
+power(superman, flight).
+power(superman, vision).
+power(superman, breath).
+power(superman, hearing).
+power(superman, healing).
+power(deadpool, healing).
+power(deadpool, martialArts).
+
+weapon(spiderman, spiderWeb).
+weapon(doctorOctopus, mechanicalArms).
+weapon(deadpool, blades).
+weapon(deadpool, guns).
+
+born(spiderman, earth).
+born(doctorOctopus, earth).
+born(superman, krypton).
+born(deadpool, earth).
+
+evilPlan(doctorOctopus, controlLifeAndDeath).
+
+realName(spiderman, peterParker).
+realName(doctorOctopus, ottoOctavius).
+realName(superman, kalEl).
+realName(superman, clarkKent).
+realName(deadpool, wadeWilson).
+
+person(maryJane).
+person(loisLane).
+person(vanessa).
+
+friends(spiderman, maryJane).
+friends(doctorOctopus, roselitaOctavius).
+friends(superman, loisLane).
+friends(deadpool, vanessa).
 
 
-hurt(doctorOctopus, maryJane).
 
 
-kills(doctorOctopus, goodGuys).
 
 
-power(spiderMan, strength).
-power(spiderMan, reflexes).
-power(spiderMan, equilibrium).
-power(spiderMan, spiderClaw).
 
 
-weakness(spiderMan, none).
 
 
-weapon(spiderMan, spiderWeb).
 
-
-realName(spiderMan, peterParker).
-
-
-human(spiderMan).
-
-
-friends(spiderMan, maryJane).
 
