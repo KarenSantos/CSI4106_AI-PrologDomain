@@ -55,7 +55,7 @@ superhero(Character, marvel):-
 superhero(Character, dc):-
 	superhero(Character),
 	dc(Character).
-	
+
 % Is this character an Antihero? Who is an Antihero?
 
 antihero(Character):-
@@ -95,6 +95,27 @@ villain(Character, dc):-
 	villain(Character),
 	dc(Character).
 
+% Are these characters from the same creator?
+
+sameCreator(Char1, Char2):-
+	Char1 \= Char2,
+	creator(C, Char1),
+	creator(C, Char2).
+	
+% Are these characters from different creators?
+
+diferentCreator(Char1, Char2):-
+	Char1 \= Char2,
+	creator(C1, Char1),
+	creator(C2, Char2),
+	C1 \= C2.
+
+% What are all the power of a character?
+
+allPowers(Character, Powers):-
+	findall(Power, power(Character, Power), P),
+	sort(P, Powers).
+
 % What superhero is archenemy of what villain?
 
 archenemy(Superhero, Villain):-
@@ -110,21 +131,62 @@ experiment(Character):-
 	\metahuman(Character),
 	power(_).
 
-% What characters are competitors?
+% What character have the same powers?
+    
+samePowers(Char1, Char2, Powers):-
+	Char1 \= Char2,
+	allPowers(Char1, Ps1),
+	allPowers(Char2, Ps2),
+	intersection(Ps1, Ps2, Powers).
 
-competitor(Char1, Char2):-
-	superhero(Char1, marvel),
-	superhero(Char2, dc),
-	power(Char1, X),         % ToDo: change this to at least 3 powers that are the same.
-	power(Char2, X).
+% What characters are semi competitors?
+
+semiCompetitors(Char1, Char2):-
+	superhero(Char1),
+	superhero(Char2),
+	diferentCreator(Char1, Char2).
 	
-competitor(Char1, Char2):-
+semiCompetitors(Char1, Char2):-
 	villain(Char1),
 	villain(Char2),
+	differentCreator(Char1, Char2).
+
+% What characters are competitors?
+
+competitors(Char1, Char2):-
+	semiCompetitors(Char1, Char2),
+	samePowers(Char1, Char2, Powers),
+	length(Powers, Len),
+	Len >= 3.
+	
+competitors(Char1, Char2):-
+	semiCompetitors(Char1, Char2),
 	evilPlan(Char1, X),
 	evilPlan(Char2, X).
 	
-% What 
+% What characters are full competitors?
+
+% fullCompetitors(Char1, Char2):-     % continue full competitors.
+	semiCompetitors(Char1, Char2),
+	
+
+% Auxiliary functions
+
+intersection([], _, []).
+intersection([H1|T1], L2, [H1|Res]) :-
+    member(H1, L2),
+    intersection(T1, L2, Res).
+intersection([_|T1], L2, Res) :-
+    intersection(T1, L2, Res).
+    
+% subtract([], _, []).                % correct subtract function
+% subtract([H|T], L2, L3) :-
+        memberchk(H, L2),
+        !,
+        subtract(T, L2, L3).
+% subtract([H|T1], L2, [H|T3]) :-
+        subtract(T1, L2, T3).
+
 
 % FACTS ————————————————————————————————————————————
 
@@ -132,6 +194,7 @@ creator(marvel, spiderman).
 creator(marvel, doctorOctopus).
 creator(dc, superman).
 creator(marvel, deadpool).
+creator(dc, lexLuthor).
 
 arrests(spiderman, villain(_)).
 arrests(superman, villain(_)).
@@ -142,9 +205,12 @@ hurts(doctorOctopus, maryJane).
 hurts(doctorOctopus, superhero(_)).
 hurts(superman, villain(_)).
 hurts(deadpool, villain(_)).
+hurts(lexLuthor, superhero(_)).
+hurts(lexLuthor, loisLane).
 
 kills(doctorOctopus, anyone).
 kills(deadpool, villain(_)).
+kills(lexLuthor, anyone).
 
 power(spiderman, strength).
 power(spiderman, reflexes).
@@ -160,24 +226,35 @@ power(superman, hearing).
 power(superman, healing).
 power(deadpool, healing).
 power(deadpool, martialArts).
+power(lexLuthor, intelligence).
 
 weapon(spiderman, spiderWeb).
 weapon(doctorOctopus, mechanicalArms).
 weapon(deadpool, blades).
 weapon(deadpool, guns).
+weapon(lexLuthor, kryptonite).
+weapon(lexLuthor, strengthSuit).
+weapon(lexLuthor, flightSuit).
+
+weakness(doctorOctopus, inferiorityComplex).
+weakness(superman, kryptonite).
+weakness(lexLuthor, onlyHuman).
 
 born(spiderman, earth).
 born(doctorOctopus, earth).
 born(superman, krypton).
 born(deadpool, earth).
+born(lexLuthor, earth).
 
 evilPlan(doctorOctopus, controlLifeAndDeath).
+evilPlan(lexLuthor, kills(lexLuthor, superman)).
 
 realName(spiderman, peterParker).
 realName(doctorOctopus, ottoOctavius).
 realName(superman, kalEl).
 realName(superman, clarkKent).
 realName(deadpool, wadeWilson).
+realName(lexLuthor, alexanderLuthor).
 
 person(maryJane).
 person(loisLane).
