@@ -171,10 +171,10 @@ competitors(Char1, Char2):-
 seek("man","woman").
 seek("woman","man").
 
-possibleSoulmate(Character,S):-
-	meta(Character, _, _, X,B,_,_),
-	seek(X,Y),
-	meta(S,_, _,Y,B,_,_).
+possibleSoulmate(CharacterA,CharacterB):-
+	meta(CharacterA, _, _,SexA,Race,_,_),
+	seek(SexA,SexB),
+	meta(CharacterB,_, _,SexB,Race,_,_).
 
 % find a character by genere and sex
 maleCharacter(Character):-
@@ -184,10 +184,10 @@ dcMale(Character):-
 	maleCharacter(Character),
 	dc(Character).
 
-crossOverSoulmate(CharacterA,S):-
-	meta(CharacterA, _, _, X,_,_,_),
-	seek(X,Y),
-	meta(S,_, _,Y,_,_,_),
+crossOverSoulmate(CharacterA,CharacterB):-
+	meta(CharacterA, _, _, SexA,_,_,_),
+	seek(SexA,SexB),
+	meta(CharacterB,_, _,SexB,_,_,_),
 	differentCreator(CharacterA,CharacterB).
 
 %% crossOver(dc,marvel).
