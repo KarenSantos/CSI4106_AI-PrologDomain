@@ -1,0 +1,29 @@
+bornWithPower("Sportsmaster").
+bornWithPower("Batman").
+bornWithPower("Wonder Woman").
+bornWithPower("Green Lantern").
+bornWithPower("Doctor Fate").
+bornWithPower("Catwoman").
+bornWithPower("Atom Girl").
+bornWithPower("John Constantine").
+bornWithPower("Doctor Octopus").
+bornWithPower("Goblin Queen").
+bornWithPower("Siryn").
+bornWithPower("Spiderman").
+bornWithPower("Wolverine").
+bornWithPower("Storm").
+bornWithPower("Thing").
+bornWithPower("Rogue").
+bornWithPower("Black Widow").
+bornWithPower("Deadpool").
+bornWithPower("Phoenix").
+bornWithPower("Banshee").
+bornWithPower("Hawkgirl").
+bornWithPower("Quicksilver").
+bornWithPower("General Zod").
+bornWithPower("Shadow King").
+bornWithPower("Silver Surfer").
+bornWithPower("Superman").
+bornWithPower("Supergirl").
+bornWithPower("Thor").
+bornWithPower("Gamora").

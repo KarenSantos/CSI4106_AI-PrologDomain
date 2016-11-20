@@ -1,0 +1,29 @@
+born("Sportsmaster", earth).
+born("Batman", earth).
+born("Wonder Woman", earth).
+born("Green Lantern", earth).
+born("Doctor Fate", earth).
+born("Catwoman", earth).
+born("Atom Girl", earth).
+born("John Constantine", earth).
+born("Doctor Octopus", earth).
+born("Goblin Queen", earth).
+born("Siryn", earth).
+born("Spiderman", earth).
+born("Wolverine", earth).
+born("Storm", earth).
+born("Thing", earth).
+born("Rogue", earth).
+born("Black Widow", earth).
+born("Deadpool", earth).
+born("Phoenix", earth).
+born("Banshee", earth).
+born("Hawkgirl", earth).
+born("Quicksilver", earth).
+born("General Zod", earth).
+born("Shadow King", earth).
+born("Silver Surfer", earth).
+born("Superman", earth).
+born("Supergirl", earth).
+born("Thor", earth).
+born("Gamora", earth).

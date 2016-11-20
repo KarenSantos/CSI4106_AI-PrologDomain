@@ -1,0 +1,69 @@
+power("Wonder Woman",divine empowerment).
+power("Wonder Woman",superhuman strength).
+power("Wonder Woman",superhuman durability).
+power("Wonder Woman",flight).
+power("Wonder Woman",superhuman speed).
+power("Wonder Woman",superhuman reflexes).
+power("Wonder Woman",superhuman agility).
+power("Wonder Woman",superhuman stamina).
+power("Wonder Woman",enhanced healing factor).
+power("Wonder Woman",empathy).
+power("Wonder Woman",charisma).
+power("Wonder Woman",animal empathy).
+power("Wonder Woman",enhanced senses).
+power("Wonder Woman",dimensional teleportation).
+power("Green Lantern",ring mastery).
+power("Green Lantern",indomitable will).
+power("Green Lantern",boxing).
+power("Green Lantern",aviation).
+power("Green Lantern",leadership).
+power("Doctor Fate",magic).
+power("Doctor Fate",immortality).
+power("Doctor Fate",invulnerability).
+power("Doctor Fate",telekinesis).
+power("Catwoman",acrobatics).
+power("Catwoman",martial arts).
+power("Catwoman",stealth).
+power("Catwoman",thievery).
+power("Catwoman",disguise).
+power("Catwoman",feline empathy).
+power("John Constantine",magic).
+power("Goblin Queen",telekinesis).
+power("Goblin Queen",telepathy).
+power("Goblin Queen",phoenix spark).
+power("Goblin Queen",sorcery).
+power("Siryn",acoustikinesis).
+power("Wolverine",superhumanly acute senses).
+power("Wolverine",enhanced strength).
+power("Wolverine",enhanced speed).
+power("Wolverine",insulated weather adaptation).
+power("Wolverine",animal empathy).
+power("Wolverine",james howlett wilderness).
+power("Wolverine",logan brandishes his claws).
+power("Wolverine",bone claws).
+power("Wolverine",adamantium poisoning immunity).
+power("Thor",asgardian/elder god hybrid physiology).
+power("Thor",life-force).
+power("Thor",memory alteration).
+power("Thor",all-tongue).
+
+
+
+%%%%%%%%%%%%
+not includeed...
+
+
+"Atom Girl"
+"Storm"
+"Thing"
+"Rogue"
+"Black Widow"
+"Phoenix"
+"Banshee"
+"Hawkgirl"
+"Quicksilver"
+"General Zod"
+"Shadow King"
+"Silver Surfer"
+"Gamora"
+%%%%%%%%%%%%%
