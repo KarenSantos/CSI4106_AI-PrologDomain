@@ -166,19 +166,21 @@ competitors(Char1, Char2):-
 	
 % What characters are full competitors?
 
-% fullCompetitors(Char1, Char2):-     % continue full competitors.
-	%% semiCompetitors(Char1, Char2),
-seek("man","woman").
-seek("woman","man").
+fullCompetitors(Char1, Char2):-
+	semiCompetitors(Char1, Char2),
+	allPowers(Char1, Ps1),
+	allPowers(Char2, Ps2),
+	subtract(Ps1, Ps2, []).
+	
 
 possibleSoulmate(CharacterA,CharacterB):-
 	meta(CharacterA, _, _,SexA,Race,_,_),
 	seek(SexA,SexB),
 	meta(CharacterB,_, _,SexB,Race,_,_).
 
-% find a character by genere and sex
+% find a character by genre and sex
 maleCharacter(Character):-
-	meta(Character _, _,"man",_,_,_).
+	meta(Character, _, _,man,_,_,_).
 
 dcMale(Character):-
 	maleCharacter(Character),
@@ -223,6 +225,7 @@ crossOverBattle(CharacterA,CharacterB):-
 %% 	meta(CharacterB, _, _, _,_,_,AlignmentB),
 %% 	member(AlignmentB, [1,2,3]),
 %% 	differentCreator(CharacterA,CharacterB).
+
 % Auxiliary functions
 
 intersection([], _, []).
@@ -232,176 +235,185 @@ intersection([H1|T1], L2, [H1|Res]) :-
 intersection([_|T1], L2, Res) :-
     intersection(T1, L2, Res).
     
-% subtract([], _, []).                % correct subtract function
-% subtract([H|T], L2, L3) :-
-        memberchk(H, L2),
-        !,
-        subtract(T, L2, L3).
-% subtract([H|T1], L2, [H|T3]) :-
-        subtract(T1, L2, T3).
+
 
 
 % FACTS ————————————————————————————————————————————
 
-creator(marvel, "Spiderman").
-creator(marvel, "Doctor Octopus").
-creator(dc, "Superman").
-creator(marvel, "Deadpool").
-creator(dc, "Lex Luthor").
+creator(marvel, spiderman).
+creator(marvel, doctorOctopus).
+creator(dc, superman).
+creator(marvel, deadpool).
+creator(dc, lexLuthor).
+creator(dc, batman).
 
-creator(dc, "Batman").
-creator(dc, "Wonder Woman").
-creator(dc, "Green Lantern").
-creator(dc, "Deathstroke").
-creator(dc, "Supergirl").
-creator(dc, "Doctor Fate").
-creator(dc, "Catwoman").
-creator(dc, "Atom Girl").
-creator(dc, "John Constantine").
-creator(dc, "Red Hood").
-creator(dc, "Sportsmaster").
-creator(dc, "General Zod").
-creator(marvel, "Thor").
-creator(marvel, "Wolverine").
-creator(marvel, "Storm").
-creator(marvel, "Silver Surfer").
-creator(marvel, "The Punisher").
-creator(marvel, "Thing").
-creator(marvel, "Rogue").
-creator(marvel, "Black Widow").
-creator(marvel, "Phoenix").
-creator(marvel, "Banshee").
-creator(marvel, "Gamora").
-creator(marvel, "Goblin Queen").
-creator(marvel, "Hawkgirl").
-creator(marvel, "Quicksilver").
-creator(marvel, "Shadow King").
-creator(marvel, "Siryn").
+creator(dc, wonderWoman).
+creator(dc, greenLantern).
+creator(dc, deathstroke).
+creator(dc, supergirl).
+creator(dc, doctorFate).
+creator(dc, catwoman).
+creator(dc, atomGirl).
+creator(dc, johnConstantine).
+creator(dc, redHood).
+creator(dc, sportsmaster).
+creator(dc, generalZod).
+creator(marvel, thor).
+creator(marvel, wolverine).
+creator(marvel, storm).
+creator(marvel, silverSurfer).
+creator(marvel, thePunisher).
+creator(marvel, thing).
+creator(marvel, rogue).
+creator(marvel, blackWidow).
+creator(marvel, phoenix).
+creator(marvel, banshee).
+creator(marvel, gamora).
+creator(marvel, goblinQueen).
+creator(marvel, hawkgirl).
+creator(marvel, quicksilver).
+creator(marvel, shadowKing).
+creator(marvel, siryn).
+
+arrests(spiderman, villain(_)).
+arrests(superman, villain(_)).
+arrests(deadpool, villain(_)).
+arrests(batman, villain(_)).
+arrests(wonderWoman, villain(_)).
+
+hurts(spiderman, villain(_)).
+hurts(doctorOctopus, maryJane).
+hurts(doctorOctopus, supermeta(_)).
+hurts(superman, villain(_)).
+hurts(deadpool, villain(_)).
+hurts(lexLuthor, supermeta(_)).
+hurts(lexLuthor, loisLane).
+hurts(batman, villain(_)).
+hurts(wonderWoman, villain(_)).
+
+kills(doctorOctopus, anyone).
+kills(deadpool, villain(_)).
+kills(lexLuthor, anyone).
+
+power(spiderman, strength).
+power(spiderman, reflexes).
+power(spiderman, equilibrium).
+power(spiderman, spiderClaw).
+power(doctorOctopus, intelligence).
+power(superman, strength).
+power(superman, speed).
+power(superman, flight).
+power(superman, vision).
+power(superman, breath).
+power(superman, hearing).
+power(superman, healing).
+power(deadpool, healing).
+power(deadpool, martialArts).
+power(lexLuthor, intelligence).
+power(batman, martialArts).
+power(wonderWoman, strength).
+power(wonderWoman, flight).
+power(wonderWoman, speed).
+power(wonderWoman, reflexes).
+
+weapon(spiderman, spiderWeb).
+weapon(doctorOctopus, mechanicalArms).
+weapon(deadpool, blades).
+weapon(deadpool, guns).
+weapon(lexLuthor, kryptonite).
+weapon(lexLuthor, strengthSuit).
+weapon(lexLuthor, flightSuit).
+weapon(batman, utilityBelt).
+weapon(batman, car).
+weapon(wonderWoman, lassoOfTruth).
+weapon(wonderWoman, magicalBracelets).
 
 
-arrests("Spiderman", villain(_)).
-arrests("Superman", villain(_)).
-arrests("Deadpool", villain(_)).
+weakness(doctorOctopus, inferiorityComplex).
+weakness(superman, kryptonite).
+weakness(lexLuthor, onlyHuman).
+weakness(batman, onlyHuman).
 
-hurts("Spiderman", villain(_)).
-hurts("Doctor Octopus", maryJane).
-hurts("Doctor Octopus", supermeta(_)).
-hurts("Superman", villain(_)).
-hurts("Deadpool", villain(_)).
-hurts("Lex Luthor", supermeta(_)).
-hurts("Lex Luthor", loisLane).
 
-kills("Doctor Octopus", anyone).
-kills("Deadpool", villain(_)).
-kills("Lex Luthor", anyone).
+born(spiderman, earth).
+born(doctorOctopus, earth).
+born(superman, krypton).
+born(deadpool, earth).
+born(lexLuthor, earth).
+born(batman, earth).
+born(
 
-power("Spiderman", strength).
-power("Spiderman", reflexes).
-power("Spiderman", equilibrium).
-power("Spiderman", spiderClaw).
-power("Doctor Octopus", intelligence).
-power("Superman", strength).
-power("Superman", speed).
-power("Superman", flight).
-power("Superman", vision).
-power("Superman", breath).
-power("Superman", hearing).
-power("Superman", healing).
-power("Deadpool", healing).
-power("Deadpool", martialArts).
-power("Lex Luthor", intelligence).
 
-weapon("Spiderman", spiderWeb).
-weapon("Doctor Octopus", mechanicalArms).
-weapon("Deadpool", blades).
-weapon("Deadpool", guns).
-weapon("Lex Luthor", kryptonite).
-weapon("Lex Luthor", strengthSuit).
-weapon("Lex Luthor", flightSuit).
+evilPlan(doctorOctopus, controlLifeAndDeath).
+evilPlan(lexLuthor, kills(lexLuthor, superman)).
 
-weakness("Doctor Octopus", inferiorityComplex).
-weakness("Superman", kryptonite).
-weakness("Lex Luthor", onlyHuman).
-
-born("Spiderman", earth).
-born("Doctor Octopus", earth).
-born("Superman", krypton).
-born("Deadpool", earth).
-born("Lex Luthor", earth).
-
-evilPlan("Doctor Octopus", controlLifeAndDeath).
-evilPlan("Lex Luthor", kills("Lex Luthor", "Superman")).
-
-realName("Spiderman", peterParker).
-realName("Doctor Octopus", ottoOctavius).
-realName("Superman", kalEl).
-realName("Superman", clarkKent).
-realName("Deadpool", wadeWilson).
-realName("Lex Luthor", alexanderLuthor).
+realName(spiderman, peterParker).
+realName(doctorOctopus, ottoOctavius).
+realName(superman, kalEl).
+realName(superman, clarkKent).
+realName(deadpool, wadeWilson).
+realName(lexLuthor, alexanderLuthor).
+realName(batman, bruceWayne).
 
 person(maryJane).
 person(loisLane).
 person(vanessa).
 
-friends("Spiderman", maryJane).
-friends("Doctor Octopus", roselitaOctavius).
-friends("Superman", loisLane).
-friends("Deadpool", vanessa).
-
+friends(spiderman, maryJane).
+friends(doctorOctopus, roselitaOctavius).
+friends(superman, loisLane).
+friends(deadpool, vanessa).
 
 
 %% meta: name height weight sex orgin hairColour alignment
 
-hair(1, "black"). 
-hair(2, "brown").
-hair(3, "blond").
-hair(4, "red").
-hair(5, "white").
-hair(6, "no hair/bald").
+hair(1, black). 
+hair(2, brown).
+hair(3, blond).
+hair(4, red).
+hair(5, white).
+hair(6, noHair).
 
-alignment(1, "Very Good").
-alignment(2, "Good").
-alignment(3, "Neutral").
-alignment(4, "Strange").
-alignment(5, "Bad").
-
-
-meta("Doctor Octopus", 178, 76, "man", "mutant",2,5).
-meta("Lex Luthor", 188, 95, "man", "human",6,5).
-meta("Batman", 188, 95, "man", "human",1,1).
-meta("Thor", 198, 105, "man", "god",3,1).
-meta("Superman", 190, 100, "man", "alien",1,1).
-meta("Spiderman", 178, 64, "man", "mutant",2,1).
-meta("Wonder Woman", 183, 60, "woman", "human",1,1).
-meta("Wolverine", 176, 166, "man", "mutant",1,2).
-meta("Green Lantern", 180, 82, "man", "human",2,2).
-meta("Storm", 180, 58, "woman", "mutant",5,1).
-meta("Deathstroke", 193, 102, "man", "human",5,5).
-meta("Silver Surfer", 195, 92, "man", "alien",6,4).
-meta("Supergirl", 171, 54, "woman", "alien",3,1).
-meta("The Punisher", 180, 90, "man", "human",1,4).
-meta("Doctor Fate", 187, 90, "man", "human",3,3).
-meta("Thing", 190, 200, "man", "mutant",6,1).
-meta("Catwoman", 175, 61, "woman", "human",1,2).
-meta("Rogue", 168, 54, "woman", "mutant",2,2).
-meta("Atom Girl", 175, 61, "woman", "human",1,2).
-meta("Black Widow", 170, 59, "woman", "mutant",4,2).
-meta("Deadpool", 188, 95, "man", "mutant",2,3).
-meta("Phoenix", 168, 52, "woman", "mutant",4,2).
-meta("Banshee", 183, 77, "woman", "mutant",3,2).
-meta("Gamora", 183, 77, "woman", "god",1,2).
-meta("Goblin Queen", 183, 77, "woman", "mutant",4,5).
-meta("Hawkgirl", 175, 61, "woman", "mutant",4,1).
-meta("Quicksilver", 183, 79, "man", "mutant",5,2).
-meta("John Constantine", 183, 89, "man", "human",3,2).
-meta("Shadow King", 185, 249, "man", "alien",6,2).
-meta("Siryn", 168, 52, "woman", "mutant",4,5).
-meta("Red Hood", 183, 81, "man", "human",4,5).
-meta("Sportsmaster", 180, 90, "man", "human",1,4).
-meta("General Zod", 190, 100, "man", "alien",1,5).
+alignment(1, veryGood).
+alignment(2, good).
+alignment(3, neutral).
+alignment(4, strange).
+alignment(5, bad).
 
 
-
+meta(doctorOctopus, 178, 76, man, metahuman,2,5).
+meta(lexLuthor, 188, 95, man, human,6,5).
+meta(batman, 188, 95, man, human,1,1).
+meta(thor, 198, 105, man, alien,3,1).
+meta(superman, 190, 100, man, alien,1,1).
+meta(spiderman, 178, 64, man, metahuman,2,1).
+meta(wonderWoman, 183, 60, woman, human,1,1).
+meta(wolverine, 176, 166, man, metahuman,1,2).
+meta(greenLantern, 180, 82, man, human,2,2).
+meta(storm, 180, 58, woman, metahuman,5,1).
+meta(deathstroke, 193, 102, man, human,5,5).
+meta(silverSurfer, 195, 92, man, alien,6,4).
+meta(supergirl, 171, 54, woman, alien,3,1).
+meta(thePunisher, 180, 90, man, human,1,4).
+meta(doctorFate, 187, 90, man, human,3,3).
+meta(thing, 190, 200, man, metahuman,6,1).
+meta(catwoman, 175, 61, woman, human,1,2).
+meta(rogue, 168, 54, woman, metahuman,2,2).
+meta(atomGirl, 175, 61, woman, human,1,2).
+meta(blackWidow, 170, 59, woman, metahuman,4,2).
+meta(deadpool, 188, 95, man, metahuman,2,3).
+meta(phoenix, 168, 52, woman, metahuman,4,2).
+meta(banshee, 183, 77, woman, metahuman,3,2).
+meta(gamora, 183, 77, woman, alien,1,2).
+meta(goblinQueen, 183, 77, woman, metahuman,4,5).
+meta(hawkgirl, 175, 61, woman, metahuman,4,1).
+meta(quicksilver, 183, 79, man, metahuman,5,2).
+meta(johnConstantine, 183, 89, man, human,3,2).
+meta(shadowKing, 185, 249, man, alien,6,2).
+meta(siryn, 168, 52, woman, metahuman,4,5).
+meta(redHood, 183, 81, man, human,4,5).
+meta(sportsmaster, 180, 90, man, human,1,4).
+meta(generalZod, 190, 100, man, alien,1,5).
 
 
 
@@ -424,7 +436,7 @@ meta("General Zod", 190, 100, "man", "alien",1,5).
 %% %% weight(B, W1, W2),
 %% write("Your height:"),
 %% read(C),
-%% meta(X, Y, Z, "man", "alien",HC).
+%% meta(X, Y, Z, man, alien,HC).
 
 
 
