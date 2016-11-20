@@ -1,0 +1,39 @@
+meta("Lex Luthor", 188, 95, "man", "human",6,5).
+meta("Deathstroke", 193, 102, "man", "human",5,5).
+meta("Red Hood", 183, 81, "man", "human",4,5).
+meta("The Punisher", 180, 90, "man", "human",1,4).
+meta("Sportsmaster", 180, 90, "man", "human",1,4).
+meta("Wonder Woman", 183, 60, "woman", "human",1,1).
+meta("Batman", 188, 95, "man", "human",1,1).
+meta("Green Lantern", 180, 82, "man", "human",2,2).
+meta("Doctor Fate", 187, 90, "man", "human",3,3).
+meta("Catwoman", 175, 61, "woman", "human",1,2).
+meta("Atom Girl", 175, 61, "woman", "human",1,2).
+meta("John Constantine", 183, 89, "man", "human",3,2).
+
+
+meta("Doctor Octopus", 178, 76, "man", "mutant",2,5).
+meta("Goblin Queen", 183, 77, "woman", "mutant",4,5).
+meta("Siryn", 168, 52, "woman", "mutant",4,5).
+meta("Spiderman", 178, 64, "man", "mutant",2,1).
+meta("Wolverine", 176, 166, "man", "mutant",1,2).
+meta("Storm", 180, 58, "woman", "mutant",5,1).
+meta("Thing", 190, 200, "man", "mutant",6,1).
+meta("Rogue", 168, 54, "woman", "mutant",2,2).
+meta("Black Widow", 170, 59, "woman", "mutant",4,2).
+meta("Deadpool", 188, 95, "man", "mutant",2,3).
+meta("Phoenix", 168, 52, "woman", "mutant",4,2).
+meta("Banshee", 183, 77, "woman", "mutant",3,2).
+meta("Hawkgirl", 175, 61, "woman", "mutant",4,1).
+meta("Quicksilver", 183, 79, "man", "mutant",5,2).
+
+
+meta("Shadow King", 185, 249, "man", "alien",6,2).
+meta("Supergirl", 171, 54, "woman", "alien",3,1).
+meta("Superman", 190, 100, "man", "alien",1,1).
+meta("General Zod", 190, 100, "man", "alien",1,5).
+meta("Silver Surfer", 195, 92, "man", "alien",6,4).
+
+
+meta("Gamora", 183, 77, "woman", "god",1,2).
+meta("Thor", 198, 105, "man", "god",3,1).
