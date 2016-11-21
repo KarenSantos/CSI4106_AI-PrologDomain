@@ -62,7 +62,7 @@ antihero(Character):-
 	arrests(Character, villain(_)),
 	hurts(Character, villain(_)),
 	kills(Character, villain(_)),
-	\evilplan(Character, _).
+	\+ evilplan(Character, _).
 	
 % Is this character an antihero from Marvel comics? Who is an antihero from Marvel comics?
 
@@ -129,7 +129,7 @@ archenemy(Superhero, Villain):-
 experiment(Character):-
 	human(Character),
 	power(Character, _),
-	\metahuman(Character).
+	\+ metahuman(Character).
 
 % What are the powers in common that two characters have?
     
@@ -144,7 +144,7 @@ samePowers(Char1, Char2, Powers):-
 semiCompetitors(Char1, Char2):-
 	superhero(Char1),
 	superhero(Char2),
-	diferentCreator(Char1, Char2).
+	differentCreator(Char1, Char2).
 	
 semiCompetitors(Char1, Char2):-
 	villain(Char1),
@@ -165,6 +165,9 @@ fullCompetitors(Char1, Char2):-
 	semiCompetitors(Char1, Char2),
 	allPowers(Char1, Ps1),
 	allPowers(Char2, Ps2),
+	length(Ps1, Len1),
+	length(Ps2, Len2),
+	Len1 =:= Len2,
 	subtract(Ps1, Ps2, []).
 
 fullCompetitors(Char1, Char2):-
@@ -241,10 +244,10 @@ creator(dc, lexLuthor).
 creator(dc, batman).
 creator(dc, wonderWoman).
 creator(dc, greenLantern).
-creator(dc, deathstroke).
+creator(dc, deathStroke).
 creator(dc, supergirl).
 creator(dc, doctorFate).
-creator(marvel, thePunisher).
+creator(marvel, punisher).
 creator(dc, catwoman).
 creator(dc, atomgirl).
 creator(dc, hellblazer).
@@ -271,7 +274,7 @@ arrests(wonderWoman, villain(_)).
 arrests(greenLantern, villain(_)).
 arrests(supergirl, villain(_)).
 arrests(doctorFate, villain(_)).
-arrests(thePunisher, villain(_)).
+arrests(punisher, villain(_)).
 arrests(catwoman, villain(_)).
 arrests(atomgirl, villain(_)).
 arrests(hellblazer, villain(_)).
@@ -303,7 +306,7 @@ hurts(deathStroke, superhero(_)).
 hurts(deathStroke, anyone).
 hurts(supergirl, villain(_)).
 hurts(doctorFace, villain(_)).
-hurts(thePunisher, villain(_)).
+hurts(punisher, villain(_)).
 hurts(catwoman, villain(_)).
 hurts(atomgirl, villain(_)).
 hurts(hellblazer, villain(_)).
@@ -332,7 +335,7 @@ kills(lexLuthor, anyone).
 kills(lexLuthor, superhero(_)).
 kills(deathStroke, anyone).
 kills(deathStroke, superhero(_)).
-kills(thePunisher, villain(_)).
+kills(punisher, villain(_)).
 kills(catwoman, villain(_)).
 kills(hellblazer, villain(_)).
 kills(redHood, villain(_)).
@@ -381,7 +384,7 @@ power(supergirl, healing).
 power(doctorFate, strength).
 power(doctorFate, flight).
 power(doctorFate, magic).
-power(thePunisher, martialArts).
+power(punisher, martialArts).
 power(catwoman, burglary).
 power(catwoman, gymnastics).
 power(atomgirl, shrinking).
@@ -448,7 +451,7 @@ weapon(wonderWoman, magicalBracelets).
 weapon(greenLantern, magicalRing).
 weapon(deathStroke, guns).
 weapon(doctorFate, amulete).
-weapon(thePunisher, guns).
+weapon(punisher, guns).
 weapon(catwoman, whip).
 weapon(catwoman, claws).
 weapon(redHood, guns).
@@ -461,7 +464,7 @@ weakness(superman, kryptonite).
 weakness(lexLuthor, noSuperPower).
 weakness(batman, noSuperPower).
 weakness(supergirl, kryptonite).
-weakness(thePunisher, noSuperPower).
+weakness(punisher, noSuperPower).
 weakness(catwoman, noSuperPower).
 weakness(redHood, noSuperPower).
 weakness(redHood, rage).
@@ -481,7 +484,7 @@ born(greenLantern, earth).
 born(deathStroke, earth).
 born(supergirl, krypton).
 born(doctorFate, earth).
-born(thePunisher, earth).
+born(punisher, earth).
 born(catwoman, earth).
 born(atomgirl, earth).
 born(hellblazer, earth).
@@ -522,7 +525,7 @@ realName(deathStroke, sladeWilson).
 realName(supergirl, karaZorEl).
 realName(supergirl, karaKent).
 realName(doctorFate, kentNelson).
-realName(thePunisher, frankCastle).
+realName(punisher, frankCastle).
 realName(catwoman, selinaKyle).
 realName(atomgirl, saluDigby).
 realName(hellblazer, johnConstantine).
@@ -579,7 +582,7 @@ info(storm, 180, 58, woman, metahuman, white, 1).
 info(deathstroke, 193, 102, man, human, white, 5).
 info(silverSurfer, 195, 92, man, alien, bald, 4).
 info(supergirl, 171, 54, woman, alien, blond, 1).
-info(thePunisher, 180, 90, man, human, black, 4).
+info(punisher, 180, 90, man, human, black, 4).
 info(doctorFate, 187, 90, man, human, blond, 3).
 info(hellblazer, 183, 89, man, human, blond, 2).
 info(catwoman, 175, 61, woman, human, black, 2).
