@@ -176,9 +176,15 @@ fullCompetitors(Char1, Char2):-
 
 romance(Char1, Char2):-
 	Char1 \= Char2,
-	info(Char1, Height1, Weight2, man, Race, _, _),
-	info(Char2, Height2, Weight2, woman, Race, _, _),
+	info(Char1, Height1, _, man, Race, _, _),
+	info(Char2, Height2, _, woman, Race, _, _),
 	Height1 >= Height2.
+	
+romance(Char1, Char2):-
+	Char1 \= Char2,
+	info(Char1, Height1, _, woman, Race, _, _),
+	info(Char2, Height2, _, man, Race, _, _),
+	Height1 =< Height2.
 
 % What characters can have a possible romance?
 
